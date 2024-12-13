@@ -1,71 +1,109 @@
 ---
-title: Introduction
-description: 'Welcome to the home of your new documentation'
+title: Getting Started
+description: 'Welcome to OpenCI Documentation'
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+## Prerequisites
 
-## Setting up
+To self-host OpenCI, you need to meet the following requirements:
 
-The first step to world-class documentation is setting up your editing environments.
+- Mac with M1 chip or later
+- macOS 14.0 or later
 
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+## Initial Setup
 
-## Make it yours
+Several tools need to be installed to self-host OpenCI.
 
-Update your docs to your brand and add valuable content for the best user conversion.
+### Tart
 
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+Tart is a tool for managing macOS VMs.
+
+<CodeGroup>
+
+  ```bash macOS
+  brew install tart
+  ```
+
+</CodeGroup>
+
+### Firebase CLI
+
+OpenCI uses Firebase, so Firebase CLI installation is required.
+
+<CodeGroup>
+
+  ```bash macOS
+  curl -sL https://firebase.tools | bash
+  ```
+
+</CodeGroup>
+
+### OpenCI Runner
+
+OpenCI Runner is a CLI for running OpenCI. Dart is required for installation.
+
+<CodeGroup>
+
+  ```bash macOS
+  dart pub global activate openci_runner
+  ```
+
+  ```bash install Dart
+  brew install dart-sdk
+  ```
+
+</CodeGroup>
+
+### Download Base Image
+
+OpenCI uses macOS 15.0 as its base image. This process takes considerable time.
+
+<CodeGroup>
+
+  ```bash macOS
+# Login to GitHub Container Registry
+echo -n ${github_acceess_token} | \
+tart login ghcr.io \
+  --username ${username} \
+  --password-stdin
+
+# Pull base image
+tart pull ghcr.io/${org-name}/${image-name}
+  ```
+
+</CodeGroup>
+
+## Firebase Setup
+OpenCI uses Firebase for its backend services. Therefore, Firebase configuration is necessary.
+
+### Create Firebase Project
+
+Access the [Firebase Console](https://console.firebase.google.com/) with your Google account and create a project.
+
+### Firestore Setup
+
+Firestore is used for build job registration. Please access Firestore and complete the provisioning process.
+
+### Firebase Functions Setup
+OpenCI uses Firebase Functions. Firebase Functions requires registration for the Blaze plan (paid). The cost is typically a few dollars per month.
+
+### Deploy Firebase Functions
+Clone the OpenCI repository.
+<CodeGroup>
+
+  ```bash macOS
+  gh repo clone open-ci-io/openci
+  ```
+
+</CodeGroup>
+
+Then, navigate to the firebase_functions directory and run the following command to deploy Firebase Functions:
+
+<CodeGroup>
+
+  ```bash macOS
+  cd apps/firebase_functions/functions
+  firebase deploy --only functions
+  ```
+
+</CodeGroup>
