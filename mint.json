@@ -1,10 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
+  "name": "OpenCI Documentation",
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0D9373",
@@ -17,40 +13,20 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Support (Discord)",
+      "url": "https://discord.gg/gwbnwWtefk"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
-  },
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Changelog",
+      "url": "https://github.com/mintlify/mintlify/releases"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
+      "version": "English",
       "pages": [
         "introduction",
         "quickstart",
@@ -58,34 +34,25 @@
       ]
     },
     {
-      "group": "Essentials",
+      "group": "始める",
+      "version": "Japanese",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "introduction_jp"
       ]
     }
   ],
+  "versions": [
+    {
+      "name": "English",
+      "locale": "en"
+    },
+    {
+      "name": "Japanese",
+      "locale": "jp"
+    }
+  ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "x": "https://x.com/open_ci_io",
+    "github": "https://github.com/open-ci-io"
   }
 }

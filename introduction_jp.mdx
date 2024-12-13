@@ -1,0 +1,109 @@
+---
+title: はじめに
+description: 'OpenCIのドキュメントへようこそ'
+---
+
+## 前提
+
+OpenCIをセルフホストするには以下の前提条件を満たしている必要があります。
+
+- M1以上のMac
+- macOS 14.0以上
+
+## 初期設定
+
+OpenCIをセルフホストするためには、いくつかのツールのインストールが必要です。
+
+### Tart
+
+TartはmacOSのVMを管理するためのツールです。
+
+<CodeGroup>
+
+  ```bash macOS
+  brew install tart
+  ```
+
+</CodeGroup>
+
+### Firebase CLI
+
+OpenCIはFirebaseを使用しているため、Firebase CLIのインストールが必要です。
+
+<CodeGroup>
+
+  ```bash macOS
+  curl -sL https://firebase.tools | bash
+  ```
+
+</CodeGroup>
+
+### OpenCI Runner
+
+OpenCI RunnerはOpenCIを実行するためのCLIです。インストールにはDartが必要です。
+
+<CodeGroup>
+
+  ```bash macOS
+  dart pub global activate openci_runner
+  ```
+
+  ```bash install Dart
+  brew install dart-sdk
+  ```
+
+</CodeGroup>
+
+### ベースイメージをダウンロード
+
+OpenCIはベースイメージとしてmacOS 15.0を使用しています。非常に時間がかかります。
+
+<CodeGroup>
+
+  ```bash macOS
+# GitHub Container Registryにログイン
+echo -n ${github_acceess_token} | \
+tart login ghcr.io \
+  --username ${username} \
+  --password-stdin
+
+# ベースイメージをPull
+tart pull ghcr.io/${org-name}/${image-name}
+  ```
+
+</CodeGroup>
+
+## Firebaseの設定
+OpenCIはバックエンド等にFirebaseを使用しています。そのため、Firebaseの設定が必要です。
+
+### Firebaseのプロジェクトを作成
+
+任意のGoogleアカウントで[Firebaseのサイト](https://console.firebase.google.com/)にアクセスし、プロジェクトを作成します。
+
+### Firestoreの設定
+
+ビルドジョブの登録にはFirestoreを使用しています。そのため、Firestoreへアクセスし、プロビジョニングを行なってください。
+
+### Firebase Functionsの設定
+OpenCIはFirebase Functionsを使用しています。Firebase Functionsの利用はBlazeプラン(有料)の登録が必要です。料金は月数百円程度です。
+
+### Firebase Functionsのデプロイ
+OpenCI CIのリポジトリをクローンします。
+<CodeGroup>
+
+  ```bash macOS
+  gh repo clone open-ci-io/openci
+  ```
+
+</CodeGroup>
+
+その後、firebase_functionsディレクトリに移動し、以下のコマンドを実行してFirebase Functionsをデプロイします。
+
+<CodeGroup>
+
+  ```bash macOS
+  cd apps/firebase_functions/functions
+  firebase deploy --only functions
+  ```
+
+</CodeGroup>
