@@ -28,9 +28,7 @@
       "group": "Get Started",
       "version": "English",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "introduction"
       ]
     },
     {
