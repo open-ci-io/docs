@@ -1,18 +1,18 @@
 ---
-title: Getting Started
+title: Introduction
 description: 'Welcome to OpenCI Documentation'
 ---
 
 ## Prerequisites
 
-To self-host OpenCI, you need to meet the following requirements:
+To self-host OpenCI, you need to meet the following prerequisites:
 
-- Mac with M1 chip or later
-- macOS 14.0 or later
+- Mac with M1 chip or higher
+- macOS 14.0 or higher
 
 ## Initial Setup
 
-Several tools need to be installed to self-host OpenCI.
+To self-host OpenCI, you need to install several tools.
 
 ### Tart
 
@@ -40,7 +40,7 @@ OpenCI uses Firebase, so Firebase CLI installation is required.
 
 ### OpenCI Runner
 
-OpenCI Runner is a CLI for running OpenCI. Dart is required for installation.
+OpenCI Runner is a CLI to run OpenCI. Dart is required for installation.
 
 <CodeGroup>
 
@@ -56,7 +56,7 @@ OpenCI Runner is a CLI for running OpenCI. Dart is required for installation.
 
 ### Download Base Image
 
-OpenCI uses macOS 15.0 as its base image. This process takes considerable time.
+OpenCI uses macOS 15.0 as the base image. This process takes considerable time.
 
 <CodeGroup>
 
@@ -73,22 +73,22 @@ tart pull ghcr.io/${org-name}/${image-name}
 
 </CodeGroup>
 
-## Firebase Setup
-OpenCI uses Firebase for its backend services. Therefore, Firebase configuration is necessary.
+## Firebase Configuration
+OpenCI uses Firebase for backend services. Therefore, Firebase configuration is necessary.
 
 ### Create Firebase Project
 
-Access the [Firebase Console](https://console.firebase.google.com/) with your Google account and create a project.
+Access the [Firebase Console](https://console.firebase.google.com/) with any Google account and create a project.
 
 ### Firestore Setup
 
-Firestore is used for build job registration. Please access Firestore and complete the provisioning process.
+Firestore is used for build job registration. Please access Firestore and complete the provisioning.
 
 ### Firebase Functions Setup
-OpenCI uses Firebase Functions. Firebase Functions requires registration for the Blaze plan (paid). The cost is typically a few dollars per month.
+OpenCI uses Firebase Functions. Firebase Functions requires Blaze plan (paid) registration. The cost is around a few dollars per month.
 
 ### Deploy Firebase Functions
-Clone the OpenCI repository.
+Clone the OpenCI CLI repository.
 <CodeGroup>
 
   ```bash macOS
@@ -97,7 +97,7 @@ Clone the OpenCI repository.
 
 </CodeGroup>
 
-Then, navigate to the firebase_functions directory and run the following command to deploy Firebase Functions:
+Then, navigate to the firebase_functions directory and run the following command to deploy Firebase Functions.
 
 <CodeGroup>
 
@@ -107,3 +107,53 @@ Then, navigate to the firebase_functions directory and run the following command
   ```
 
 </CodeGroup>
+
+## GitHub App Configuration
+
+OpenCI uses GitHub App to fetch build jobs.
+
+### Create GitHub App
+
+Access [Create GitHub App](https://github.com/settings/apps/new) and create a GitHub App.
+
+Then, specify the gitHubAppFunction of Firebase Functions as the webhook URL for the GitHub App.
+
+### Secret Configuration
+
+Register the secrets used in Firebase Functions.
+
+#### APP_ID
+
+<CodeGroup>
+
+  ```bash macOS
+  firebase functions:config:set APP_ID
+  ```
+
+</CodeGroup>
+
+#### GITHUB_WEBHOOK_SECRET
+
+<CodeGroup>
+
+  ```bash macOS
+  firebase functions:config:set GITHUB_WEBHOOK_SECRET
+  ```
+
+</CodeGroup>
+
+#### PRIVATE_KEY
+
+<CodeGroup>
+
+  ```bash macOS
+  firebase functions:config:set PRIVATE_KEY
+  ```
+
+</CodeGroup>
+
+### Create Firebase Service Account
+
+Create a Firebase service account and place it as apps/openci_runner/firebase_service_account.json.
+
+Now the self-hosting setup for OpenCI is complete. Great job!

@@ -2,6 +2,10 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "OpenCI Documentation",
   "favicon": "/favicon.svg",
+  "logo": {
+    "light": "/logo/openci_logo_dark.svg",
+    "dark": "/logo/openci_logo_light.svg"
+  },
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
@@ -28,14 +32,16 @@
       "group": "Get Started",
       "version": "English",
       "pages": [
-        "introduction"
+        "introduction",
+        "run"
       ]
     },
     {
       "group": "始める",
       "version": "Japanese",
       "pages": [
-        "introduction_jp"
+        "introduction_jp",
+        "run_jp"
       ]
     }
   ],
