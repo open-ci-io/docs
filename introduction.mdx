@@ -21,7 +21,7 @@ Tart is a tool for managing macOS VMs.
 <CodeGroup>
 
   ```bash macOS
-  brew install tart
+  brew install cirruslabs/cli/tart
   ```
 
 </CodeGroup>
@@ -61,14 +61,7 @@ OpenCI uses macOS 15.0 as the base image. This process takes considerable time.
 <CodeGroup>
 
   ```bash macOS
-# Login to GitHub Container Registry
-echo -n ${github_acceess_token} | \
-tart login ghcr.io \
-  --username ${username} \
-  --password-stdin
-
-# Pull base image
-tart pull ghcr.io/open-ci-io/sequoia:0.0.2
+tart pull ghcr.io/open-ci-io/sequoia:0.0.4
   ```
 
 </CodeGroup>
